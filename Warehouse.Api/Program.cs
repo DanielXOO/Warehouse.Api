@@ -1,4 +1,5 @@
 using Microsoft.OpenApi.Models;
+using Warehouse.Common.Configurations;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +20,10 @@ builder.Services.AddSwaggerGen(option =>
         }
     });
 });
+
+builder.Services.Configure<DbConfiguration>(builder.Configuration.GetSection("DbConfiguration"));
+
+builder.Services.AddRouting(o => o.LowercaseUrls = true);
 
 var app = builder.Build();
 

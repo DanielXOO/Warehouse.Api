@@ -2,10 +2,8 @@ using Warehouse.DomainModels.Enums;
 
 namespace Warehouse.DomainModels;
 
-public class Product
+public sealed class Product : BaseObject
 {
-    public long Id { get; set; }
-
     public string Name { get; set; }
 
     public string Description { get; set; }

@@ -1,6 +1,8 @@
-namespace Warehouse.DomainModels;
+using MongoDB.Bson.Serialization.Attributes;
 
-public sealed class Category : BaseObject
+namespace Warehouse.Entities;
+
+public class Category : BaseObject
 {
     public string Name { get; set; }
     
@@ -10,5 +12,5 @@ public sealed class Category : BaseObject
     
     public int OutOfStockQuantity { get; set; }
     
-    public ICollection<Product> Products { get; set; }
+    public ICollection<long> ProductsIds { get; set; }
 }

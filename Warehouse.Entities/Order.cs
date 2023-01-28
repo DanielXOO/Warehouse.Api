@@ -1,8 +1,8 @@
-using Warehouse.DomainModels.Enums;
+using Warehouse.Entities.Enums;
 
-namespace Warehouse.DomainModels;
+namespace Warehouse.Entities;
 
-public sealed class Order : BaseObject
+public class Order : BaseObject
 {
     public Product Product { get; set; }
 
