@@ -1,5 +1,5 @@
 using MongoDB.Driver;
-using Warehouse.Data.Core.Interfaces;
+using Warehouse.Data.Core;
 using Warehouse.Data.Repositories.Interfaces;
 using Warehouse.Entities;
 
@@ -7,7 +7,7 @@ namespace Warehouse.Data.Repositories;
 
 public class ProductRepository : Repository<Product>, IProductRepository
 {
-    public ProductRepository(IDbContext dbContext) : base(dbContext)
+    public ProductRepository(DbContext dbContext) : base(dbContext)
     {
     }
 

@@ -4,9 +4,9 @@ namespace Warehouse.Data.Core;
 
 public class UnitOfWork : IUnitOfWork
 {
-    private readonly IDbContext _dbContext;
+    private readonly DbContext _dbContext;
     
-    public UnitOfWork(IDbContext dbContext)
+    public UnitOfWork(DbContext dbContext)
     {
         _dbContext = dbContext;
     }
