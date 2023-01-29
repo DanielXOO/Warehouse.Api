@@ -1,11 +1,10 @@
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 using Warehouse.Common.Configurations;
-using Warehouse.Data.Core.Interfaces;
 
 namespace Warehouse.Data.Core;
 
-public class DbContext : IDbContext
+public class DbContext
 {
     private readonly IMongoDatabase _db;
 
@@ -41,16 +40,23 @@ public class DbContext : IDbContext
         {
             _session.StartTransaction();
             
-            var commandsTasks = _commands.Select(command => command());
-            await Task.WhenAll(commandsTasks);
+            try
+            {
+                var commandsTasks = _commands.Select(command => command());
+                await Task.WhenAll(commandsTasks);
             
-            await _session.CommitTransactionAsync();
+                await _session.CommitTransactionAsync();
+            }
+            catch (Exception e)
+            {
+                await _session.AbortTransactionAsync();
+            }
         }
 
         return _commands.Count;
     }
 
-    public IMongoCollection<T> GetCollection<T>(string name)
+    public IMongoCollection<T> GetCollection<T>(string name) where T: class
     {
         var collection = _db.GetCollection<T>(name);
 

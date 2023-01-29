@@ -1,5 +1,3 @@
-using MongoDB.Bson.Serialization.Attributes;
-
 namespace Warehouse.Entities;
 
 public class Category : BaseObject

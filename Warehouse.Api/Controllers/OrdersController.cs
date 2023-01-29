@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Warehouse.Api.Controllers;
 
 [ApiController]
-[Route("/api/")]
+[Route("/api/[controller]")]
 public class OrdersController : Controller
 {
     public OrdersController()
@@ -12,7 +12,7 @@ public class OrdersController : Controller
     }
 
 
-    [HttpGet("[controller]/{id:long}")]
+    [HttpGet("{id:long}")]
     public async Task<IActionResult> GetOrderById(long id)
     {
         return Ok();

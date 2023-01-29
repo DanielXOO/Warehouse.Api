@@ -1,5 +1,5 @@
 using MongoDB.Driver;
-using Warehouse.Data.Core.Interfaces;
+using Warehouse.Data.Core;
 using Warehouse.Data.Repositories.Interfaces;
 using Warehouse.Entities;
 
@@ -7,15 +7,15 @@ namespace Warehouse.Data.Repositories;
 
 public class Repository<T> : IRepository<T> where T: BaseObject
 {
-    protected readonly IDbContext DbContext;
+    protected readonly DbContext DbContext;
 
     protected readonly IMongoCollection<T> DbSet;
 
 
-    public Repository(IDbContext dbContext)
+    public Repository(DbContext dbContext)
     {
         DbContext = dbContext;
-        DbSet = DbContext.GetCollection<T>(nameof(T));
+        DbSet = DbContext.GetCollection<T>(typeof(T).Name);
     }
     
     
