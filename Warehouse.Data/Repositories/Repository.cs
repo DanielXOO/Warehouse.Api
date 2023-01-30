@@ -1,7 +1,7 @@
 using MongoDB.Driver;
 using Warehouse.Data.Core;
+using Warehouse.Data.Entities;
 using Warehouse.Data.Repositories.Interfaces;
-using Warehouse.Entities;
 
 namespace Warehouse.Data.Repositories;
 

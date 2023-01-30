@@ -24,7 +24,7 @@ public class AddProductCommandHandler : IRequestHandler<AddProductCommand, Domai
     
     public async Task<DomainModels.Product> Handle(AddProductCommand request, CancellationToken cancellationToken)
     {
-        var productEntity = _mapper.Map<Entities.Product>(request);
+        var productEntity = _mapper.Map<Data.Entities.Product>(request);
         _productRepository.Create(productEntity);
         await _unitOfWork.SaveChangesAsync();
 

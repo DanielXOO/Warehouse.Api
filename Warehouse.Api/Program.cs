@@ -3,6 +3,7 @@ using Microsoft.OpenApi.Models;
 using Warehouse.Common.Configurations;
 using Warehouse.Data.Core;
 using Warehouse.Data.Core.Interfaces;
+using Warehouse.Data.Entities;
 using Warehouse.Data.Repositories;
 using Warehouse.Data.Repositories.Interfaces;
 using Warehouse.Domain.Mapper;
@@ -31,6 +32,7 @@ builder.Services.AddScoped<DbContext>();
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 
 builder.Services.AddMediatR(typeof(AddProductCommand).Assembly);
 builder.Services.AddAutoMapper(c =>

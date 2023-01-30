@@ -5,14 +5,14 @@ using Warehouse.Data.Repositories.Interfaces;
 
 namespace Warehouse.Data.Repositories;
 
-public class ProductRepository : Repository<Product>, IProductRepository
+public class CategoryRepository : Repository<Category>, ICategoryRepository
 {
-    public ProductRepository(DbContext dbContext) : base(dbContext)
+    public CategoryRepository(DbContext dbContext) : base(dbContext)
     {
     }
 
     
-    public async Task<Product> GetProductByNameAsync(string name)
+    public async Task<Category> GetCategoryByNameAsync(string name)
     {
         var document = await DbSet.FindAsync(o => o.Name == name);
         var result = await document.FirstOrDefaultAsync();

@@ -1,6 +1,6 @@
-using Warehouse.Entities.Enums;
+using Warehouse.Data.Entities.Enums;
 
-namespace Warehouse.Entities;
+namespace Warehouse.Data.Entities;
 
 public class Order : BaseObject
 {

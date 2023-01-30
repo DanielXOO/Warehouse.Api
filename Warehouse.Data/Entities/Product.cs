@@ -1,4 +1,4 @@
-namespace Warehouse.Entities;
+namespace Warehouse.Data.Entities;
 
 public class Product : BaseObject
 {

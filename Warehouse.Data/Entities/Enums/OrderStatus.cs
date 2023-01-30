@@ -1,4 +1,4 @@
-namespace Warehouse.Entities.Enums;
+namespace Warehouse.Data.Entities.Enums;
 
 public enum OrderStatus
 {
