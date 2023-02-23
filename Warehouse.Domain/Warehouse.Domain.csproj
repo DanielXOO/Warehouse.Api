@@ -7,10 +7,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Order" />
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\Warehouse.Data\Warehouse.Data.csproj" />
       <ProjectReference Include="..\Warehouse.DomainModels\Warehouse.DomainModels.csproj" />
     </ItemGroup>
