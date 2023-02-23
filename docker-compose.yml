@@ -1,0 +1,46 @@
+networks:
+  warehouse-db-cluster-set:
+    driver: bridge
+
+services:
+  warehouse-db-primary:
+    image: mongo
+    ports:
+      - 30001:27017
+    restart: always
+    container_name: warehouse-db-primary
+    command: >
+      mongod
+      --replSet rs0
+      --bind_ip localhost,warehouse-db-primary
+    volumes:
+      - /data/db0:/data/db
+    networks:
+      - warehouse-db-cluster-set
+  
+  warehouse-db-secondary:
+    image: mongo
+    ports:
+      - 30002:27017
+    restart: always
+    command: >
+      mongod
+      --replSet rs0
+      --bind_ip localhost,warehouse-db-secondary
+    volumes:
+    - /data/db1:/data/db
+    networks:
+    - warehouse-db-cluster-set
+
+  mongo-rs-init:
+    image: mongo
+    container_name: mongo-rs-init
+    depends_on:
+      - warehouse-db-primary
+      - warehouse-db-secondary
+    entrypoint: [ "replica_set_init.sh" ]
+    restart: on-failure
+    volumes:
+      - ./scripts/replica_set_init.sh:/usr/local/bin/replica_set_init.sh:ro
+    networks:
+      - warehouse-db-cluster-set
