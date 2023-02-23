@@ -1,6 +1,6 @@
 using MediatR;
 
-namespace Warehouse.Domain.Category;
+namespace Warehouse.Domain.Category.Commands;
 
 public class AddCategoryCommand : IRequest<DomainModels.Category>
 {

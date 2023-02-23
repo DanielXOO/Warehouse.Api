@@ -3,7 +3,7 @@ using MediatR;
 using Warehouse.Data.Core.Interfaces;
 using Warehouse.Data.Repositories.Interfaces;
 
-namespace Warehouse.Domain.Category;
+namespace Warehouse.Domain.Category.Commands;
 
 public class AddCategoryCommandHandler : IRequestHandler<AddCategoryCommand, DomainModels.Category>
 {
@@ -25,6 +25,9 @@ public class AddCategoryCommandHandler : IRequestHandler<AddCategoryCommand, Dom
     public async Task<DomainModels.Category> Handle(AddCategoryCommand request, CancellationToken cancellationToken)
     {
         var categoryEntity = _mapper.Map<Data.Entities.Category>(request);
+
+        categoryEntity.ProductsIds ??= new List<long>();
+        
         _categoryRepository.Create(categoryEntity);
         await _unitOfWork.SaveChangesAsync();
 

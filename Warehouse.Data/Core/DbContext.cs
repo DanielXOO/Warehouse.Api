@@ -1,6 +1,7 @@
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 using Warehouse.Common.Configurations;
+using Warehouse.Common.Exceptions;
 
 namespace Warehouse.Data.Core;
 
@@ -25,7 +26,7 @@ public class DbContext
     
     public void Dispose()
     {
-        _session.Dispose();
+        _session?.Dispose();
         GC.SuppressFinalize(this);
     }
 
@@ -50,6 +51,7 @@ public class DbContext
             catch (Exception e)
             {
                 await _session.AbortTransactionAsync();
+                throw new DataException("Transaction aborted", e);
             }
         }
 

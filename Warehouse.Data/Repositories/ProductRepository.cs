@@ -19,4 +19,12 @@ public class ProductRepository : Repository<Product>, IProductRepository
 
         return result;
     }
+
+    public async Task<IEnumerable<Product>> GetProductsByCategoryId(long categoryId)
+    {
+        var document = await DbSet.FindAsync(o => o.CategoryId == categoryId);
+        var result = await document.ToListAsync();
+
+        return result;
+    }
 }

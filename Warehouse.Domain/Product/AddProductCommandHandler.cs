@@ -1,3 +1,4 @@
+using System.Data;
 using AutoMapper;
 using MediatR;
 using Warehouse.Data.Core.Interfaces;
@@ -9,25 +10,40 @@ public class AddProductCommandHandler : IRequestHandler<AddProductCommand, Domai
 {
     private readonly IProductRepository _productRepository;
 
+    private readonly ICategoryRepository _categoryRepository;
+
     private readonly IUnitOfWork _unitOfWork;
 
     private readonly IMapper _mapper;
     
     
-    public AddProductCommandHandler(IProductRepository productRepository, IUnitOfWork unitOfWork, IMapper mapper)
+    public AddProductCommandHandler(IProductRepository productRepository, IUnitOfWork unitOfWork, IMapper mapper,
+        ICategoryRepository categoryRepository)
     {
         _productRepository = productRepository;
         _unitOfWork = unitOfWork;
         _mapper = mapper;
+        _categoryRepository = categoryRepository;
     }
     
     
     public async Task<DomainModels.Product> Handle(AddProductCommand request, CancellationToken cancellationToken)
     {
+        var category = await _categoryRepository.GetByIdAsync(request.CategoryId);
+        
+        if (category == null)
+        {
+            throw new DataException("Category with such id do not exists");
+        }
+        
         var productEntity = _mapper.Map<Data.Entities.Product>(request);
         _productRepository.Create(productEntity);
-        await _unitOfWork.SaveChangesAsync();
 
+        category.ProductsIds.Add(productEntity.Id);
+        _categoryRepository.Update(category);
+        
+        await _unitOfWork.SaveChangesAsync();
+        
         var product = _mapper.Map<DomainModels.Product>(productEntity);
 
         return product;

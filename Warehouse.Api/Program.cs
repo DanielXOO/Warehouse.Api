@@ -3,7 +3,6 @@ using Microsoft.OpenApi.Models;
 using Warehouse.Common.Configurations;
 using Warehouse.Data.Core;
 using Warehouse.Data.Core.Interfaces;
-using Warehouse.Data.Entities;
 using Warehouse.Data.Repositories;
 using Warehouse.Data.Repositories.Interfaces;
 using Warehouse.Domain.Mapper;

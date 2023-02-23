@@ -1,7 +1,9 @@
-namespace Warehouse.DomainModels;
+namespace Warehouse.Api.Models.Response;
 
-public sealed class Category : BaseObject
+public class CategoryResponseModel
 {
+    public long Id { get; set; }
+    
     public string Name { get; set; }
     
     public string Description { get; set; }
@@ -10,5 +12,5 @@ public sealed class Category : BaseObject
     
     public int OutOfStockQuantity { get; set; }
     
-    public IEnumerable<Product> Products { get; set; }
+    public IEnumerable<ProductResponseModel> Products { get; set; }
 }

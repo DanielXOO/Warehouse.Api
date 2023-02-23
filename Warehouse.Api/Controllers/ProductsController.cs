@@ -1,5 +1,6 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Warehouse.Common.Exceptions;
 using Warehouse.Domain.Product;
 
 namespace Warehouse.Api.Controllers;
@@ -22,8 +23,7 @@ public class ProductsController : Controller
     {
         if (addProductCommand == null)
         {
-            //TODO: throw exception
-            return BadRequest();
+            throw new HttpException($"{nameof(AddProductCommand)} can not be null");
         }
 
         var product = await _mediator.Send(addProductCommand);

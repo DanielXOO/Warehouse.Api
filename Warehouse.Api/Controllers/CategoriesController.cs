@@ -1,7 +1,9 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Warehouse.Common.Exceptions;
 using Warehouse.Domain.Category;
-using Warehouse.Domain.Product;
+using Warehouse.Domain.Category.Commands;
+using Warehouse.Domain.Category.Queries;
 
 namespace Warehouse.Api.Controllers;
 
@@ -19,16 +21,25 @@ public class CategoriesController : Controller
 
     
     [HttpPost]
-    public async Task<IActionResult> AddProduct(AddCategoryCommand addCategoryCommand)
+    public async Task<IActionResult> AddCategory(AddCategoryCommand addCategoryCommand)
     {
         if (addCategoryCommand == null)
         {
-            //TODO: throw exception
-            return BadRequest();
+            throw new HttpException($"{nameof(AddCategoryCommand)} can not be null");
         }
 
         var category = await _mediator.Send(addCategoryCommand);
 
-        return Ok();
+        return CreatedAtAction(nameof(GetCategoryById), new { category.Id }, category);
+    }
+
+    [HttpGet("/{id:long}")]
+    public async Task<IActionResult> GetCategoryById(long id)
+    {
+        var categoryQuery = new GetCategoryByIdQuery(id);
+
+        var category = await _mediator.Send(categoryQuery);
+        
+        return Ok(category);
     }
 }
