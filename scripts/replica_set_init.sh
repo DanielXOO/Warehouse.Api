@@ -25,7 +25,7 @@ sleep 5;
 
 if [[ -n "${DB_USERNAME:-}" && -n "${DB_PASSWORD:-}" ]]; then
 	mongosh --quiet \
-	--host warehouse-db-primary \
+	--host warehouse-db-secondary \
 	-u $DB_USERNAME -p $DB_PASSWORD \
 	--authenticationDatabase admin \
 	<<-EOF
@@ -33,7 +33,7 @@ if [[ -n "${DB_USERNAME:-}" && -n "${DB_PASSWORD:-}" ]]; then
 	EOF
 else
 	mongosh --quiet \
-	--host warehouse-db-primary \
+	--host warehouse-db-secondary \
 	<<-EOF
 		rs.initiate($_config);
 	EOF

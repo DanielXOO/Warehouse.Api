@@ -23,6 +23,9 @@ services:
     ports:
       - 30002:27017
     restart: always
+    container_name: warehouse-db-secondary
+    depends_on:
+      - warehouse-db-primary
     command: >
       mongod
       --replSet rs0
