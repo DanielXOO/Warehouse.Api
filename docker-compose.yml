@@ -23,6 +23,8 @@ services:
     ports:
       - 30002:27017
     restart: always
+    depends_on:
+      - warehouse-db-primary
     command: >
       mongod
       --replSet rs0
