@@ -9,6 +9,8 @@ services:
       - 30001:27017
     restart: always
     container_name: warehouse-db-primary
+    depends_on:
+      - warehouse-db-secondary
     command: >
       mongod
       --replSet rs0
@@ -17,20 +19,21 @@ services:
       - /data/db0:/data/db
     networks:
       - warehouse-db-cluster-set
-  
+
   warehouse-db-secondary:
     image: mongo
     ports:
       - 30002:27017
     restart: always
+    container_name: warehouse-db-secondary
     command: >
       mongod
       --replSet rs0
       --bind_ip localhost,warehouse-db-secondary
     volumes:
-    - /data/db1:/data/db
+      - /data/db1:/data/db
     networks:
-    - warehouse-db-cluster-set
+      - warehouse-db-cluster-set
 
   mongo-rs-init:
     image: mongo
