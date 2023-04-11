@@ -1,8 +1,24 @@
+version: '3.9'
+
 networks:
-  warehouse-db-cluster-set:
+  warehouse-network:
     driver: bridge
 
 services:
+  warehouse-api:
+    build: .
+    restart: always
+    container_name: warehouse-db-api
+    ports:
+      - "5050:80"
+    depends_on:
+      - warehouse-db-primary
+      - warehouse-db-secondary
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    networks:
+      - warehouse-network
+  
   warehouse-db-primary:
     image: mongo
     ports:
@@ -18,7 +34,12 @@ services:
     volumes:
       - /data/db0:/data/db
     networks:
-      - warehouse-db-cluster-set
+      - warehouse-network
+    healthcheck:
+      test: [ "CMD", "mongo", "--eval", "db.runCommand('ping').ok" ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
 
   warehouse-db-secondary:
     image: mongo
@@ -33,17 +54,22 @@ services:
     volumes:
       - /data/db1:/data/db
     networks:
-      - warehouse-db-cluster-set
-
+      - warehouse-network
+    healthcheck:
+      test: [ "CMD", "mongo", "--eval", "db.runCommand('ping').ok" ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      
   mongo-rs-init:
     image: mongo
     container_name: mongo-rs-init
     depends_on:
       - warehouse-db-primary
       - warehouse-db-secondary
-    entrypoint: [ "replica_set_init.sh" ]
     restart: on-failure
+    command: /bin/bash -c "echo 'Script started'; /usr/local/bin/replica_set_init.sh; echo 'Script finished'"
     volumes:
       - ./scripts/replica_set_init.sh:/usr/local/bin/replica_set_init.sh:ro
     networks:
-      - warehouse-db-cluster-set
+      - warehouse-network
