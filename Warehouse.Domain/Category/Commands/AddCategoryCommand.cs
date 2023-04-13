@@ -2,7 +2,7 @@ using MediatR;
 
 namespace Warehouse.Domain.Category.Commands;
 
-public class AddCategoryCommand : IRequest<DomainModels.Category>
+public sealed class AddCategoryCommand : IRequest<DomainModels.Category>
 {
     public string Name { get; set; }
     

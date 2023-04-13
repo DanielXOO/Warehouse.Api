@@ -10,6 +10,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Warehouse.Common", "Warehou
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Warehouse.Domain", "Warehouse.Domain\Warehouse.Domain.csproj", "{402490AC-3B92-4B6C-8633-D7289943E1DC}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{44752D14-4243-4E97-8EC0-B15F12B3D6B9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DanielXOO.Serilog.CorrelationId.Enricher", "Modules\DanielXOO.Serilog.CorrelationId.Enricher\DanielXOO.Serilog.CorrelationId.Enricher.csproj", "{7A021E4D-F208-4C56-8C2D-376FDB8DBDF0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DanielXOO.Serilog.Sinks.Kafka", "Modules\DanielXOO.Serilog.Sinks.Kafka\DanielXOO.Serilog.Sinks.Kafka.csproj", "{333F956B-2409-4809-A81C-7836CFAD2334}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,5 +42,17 @@ Global
 		{402490AC-3B92-4B6C-8633-D7289943E1DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{402490AC-3B92-4B6C-8633-D7289943E1DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{402490AC-3B92-4B6C-8633-D7289943E1DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A021E4D-F208-4C56-8C2D-376FDB8DBDF0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A021E4D-F208-4C56-8C2D-376FDB8DBDF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A021E4D-F208-4C56-8C2D-376FDB8DBDF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A021E4D-F208-4C56-8C2D-376FDB8DBDF0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{333F956B-2409-4809-A81C-7836CFAD2334}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{333F956B-2409-4809-A81C-7836CFAD2334}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{333F956B-2409-4809-A81C-7836CFAD2334}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{333F956B-2409-4809-A81C-7836CFAD2334}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7A021E4D-F208-4C56-8C2D-376FDB8DBDF0} = {44752D14-4243-4E97-8EC0-B15F12B3D6B9}
+		{333F956B-2409-4809-A81C-7836CFAD2334} = {44752D14-4243-4E97-8EC0-B15F12B3D6B9}
 	EndGlobalSection
 EndGlobal

@@ -2,7 +2,7 @@ using AutoMapper;
 
 namespace Warehouse.Domain.Mapper;
 
-public class EntityProfile : Profile
+public sealed class EntityProfile : Profile
 {
     public EntityProfile()
     {

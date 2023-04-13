@@ -5,7 +5,7 @@ using Warehouse.Data.Repositories.Interfaces;
 
 namespace Warehouse.Domain.Category.Queries;
 
-public class GetCategoryByIdQueryHandler : IRequestHandler<GetCategoryByIdQuery, DomainModels.Category>
+public sealed class GetCategoryByIdQueryHandler : IRequestHandler<GetCategoryByIdQuery, DomainModels.Category>
 {
     private readonly ICategoryRepository _categoryRepository;
 

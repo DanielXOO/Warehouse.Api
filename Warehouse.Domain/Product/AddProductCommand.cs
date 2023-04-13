@@ -2,7 +2,7 @@ using MediatR;
 
 namespace Warehouse.Domain.Product;
 
-public class AddProductCommand : IRequest<DomainModels.Product>
+public sealed class AddProductCommand : IRequest<DomainModels.Product>
 {
     public string Name { get; set; }
 

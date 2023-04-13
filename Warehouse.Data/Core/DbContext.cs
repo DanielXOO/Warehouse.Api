@@ -5,7 +5,7 @@ using Warehouse.Common.Exceptions;
 
 namespace Warehouse.Data.Core;
 
-public class DbContext
+public sealed class DbContext
 {
     private readonly IMongoDatabase _db;
 

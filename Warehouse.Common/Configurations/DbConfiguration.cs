@@ -1,6 +1,6 @@
 namespace Warehouse.Common.Configurations;
 
-public class DbConfiguration
+public sealed class DbConfiguration
 {
     public string Connection { get; set; }
     

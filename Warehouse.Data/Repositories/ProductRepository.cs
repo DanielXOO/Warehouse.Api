@@ -5,7 +5,7 @@ using Warehouse.Data.Repositories.Interfaces;
 
 namespace Warehouse.Data.Repositories;
 
-public class ProductRepository : Repository<Product>, IProductRepository
+public sealed class ProductRepository : Repository<Product>, IProductRepository
 {
     public ProductRepository(DbContext dbContext) : base(dbContext)
     {

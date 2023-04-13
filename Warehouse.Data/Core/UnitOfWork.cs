@@ -2,7 +2,7 @@ using Warehouse.Data.Core.Interfaces;
 
 namespace Warehouse.Data.Core;
 
-public class UnitOfWork : IUnitOfWork
+public sealed class UnitOfWork : IUnitOfWork
 {
     private readonly DbContext _dbContext;
     

@@ -2,7 +2,7 @@ using Warehouse.Data.Entities.Enums;
 
 namespace Warehouse.Data.Entities;
 
-public class Order : BaseObject
+public sealed class Order : BaseObject
 {
     public Product Product { get; set; }
 

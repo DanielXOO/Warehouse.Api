@@ -6,7 +6,7 @@ using Warehouse.Data.Repositories.Interfaces;
 
 namespace Warehouse.Domain.Product;
 
-public class AddProductCommandHandler : IRequestHandler<AddProductCommand, DomainModels.Product>
+public sealed class AddProductCommandHandler : IRequestHandler<AddProductCommand, DomainModels.Product>
 {
     private readonly IProductRepository _productRepository;
 

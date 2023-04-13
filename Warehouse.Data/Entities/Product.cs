@@ -1,6 +1,6 @@
 namespace Warehouse.Data.Entities;
 
-public class Product : BaseObject
+public sealed class Product : BaseObject
 {
     public string Name { get; set; }
 

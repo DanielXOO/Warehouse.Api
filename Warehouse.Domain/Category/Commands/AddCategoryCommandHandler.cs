@@ -5,7 +5,7 @@ using Warehouse.Data.Repositories.Interfaces;
 
 namespace Warehouse.Domain.Category.Commands;
 
-public class AddCategoryCommandHandler : IRequestHandler<AddCategoryCommand, DomainModels.Category>
+public sealed class AddCategoryCommandHandler : IRequestHandler<AddCategoryCommand, DomainModels.Category>
 {
     private readonly ICategoryRepository _categoryRepository;
 

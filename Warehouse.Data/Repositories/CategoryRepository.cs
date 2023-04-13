@@ -5,7 +5,7 @@ using Warehouse.Data.Repositories.Interfaces;
 
 namespace Warehouse.Data.Repositories;
 
-public class CategoryRepository : Repository<Category>, ICategoryRepository
+public sealed class CategoryRepository : Repository<Category>, ICategoryRepository
 {
     public CategoryRepository(DbContext dbContext) : base(dbContext)
     {

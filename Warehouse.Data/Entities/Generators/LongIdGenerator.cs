@@ -3,7 +3,7 @@ using MongoDB.Driver;
 
 namespace Warehouse.Data.Entities.Generators;
 
-public class LongIdGenerator : IIdGenerator
+public sealed class LongIdGenerator : IIdGenerator
 {
     public object GenerateId(object container, object document)
     {

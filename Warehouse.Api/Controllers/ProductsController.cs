@@ -23,7 +23,7 @@ public class ProductsController : Controller
     {
         if (addProductCommand == null)
         {
-            throw new HttpException($"{nameof(AddProductCommand)} can not be null");
+            throw new BadRequestException($"{nameof(AddProductCommand)} can not be null");
         }
 
         var product = await _mediator.Send(addProductCommand);

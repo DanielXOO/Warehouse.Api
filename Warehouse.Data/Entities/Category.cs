@@ -1,6 +1,6 @@
 namespace Warehouse.Data.Entities;
 
-public class Category : BaseObject
+public sealed class Category : BaseObject
 {
     public string Name { get; set; }
     

@@ -1,7 +1,6 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Warehouse.Common.Exceptions;
-using Warehouse.Domain.Category;
 using Warehouse.Domain.Category.Commands;
 using Warehouse.Domain.Category.Queries;
 
@@ -12,6 +11,7 @@ namespace Warehouse.Api.Controllers;
 public class CategoriesController : Controller
 {
     private readonly IMediator _mediator;
+    
     
     
     public CategoriesController(IMediator mediator)
@@ -25,7 +25,7 @@ public class CategoriesController : Controller
     {
         if (addCategoryCommand == null)
         {
-            throw new HttpException($"{nameof(AddCategoryCommand)} can not be null");
+            throw new BadRequestException($"{nameof(AddCategoryCommand)} can not be null");
         }
 
         var category = await _mediator.Send(addCategoryCommand);
