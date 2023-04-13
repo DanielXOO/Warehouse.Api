@@ -1,3 +1,5 @@
+using ILogger = Serilog.ILogger;
+
 namespace Warehouse.Api.Middlewares;
 
 public class CorrelationIdMiddleware
@@ -6,9 +8,13 @@ public class CorrelationIdMiddleware
 
     private readonly RequestDelegate _next;
 
-    public CorrelationIdMiddleware(RequestDelegate next)
+    private readonly ILogger _logger;
+
+    
+    public CorrelationIdMiddleware(RequestDelegate next, ILogger logger)
     {
         _next = next;
+        _logger = logger;
     }
 
 
@@ -17,12 +23,23 @@ public class CorrelationIdMiddleware
         if (!context.Request.Headers.TryGetValue(HeaderName, out var correlationId))
         {
             correlationId = Guid.NewGuid().ToString();
+
             context.Request.Headers.Add(HeaderName, correlationId);
         }
+        
+        _logger.Debug($"Method: {context.Request.Method} " +
+                      $"Path: {context.Request.Path} CorrelationId: {correlationId} Time: {DateTime.UtcNow}");
         
         context.Response.OnStarting(() =>
         {
             context.Response.Headers.Add(HeaderName, correlationId);
+            
+            return Task.CompletedTask;
+        });
+        
+        context.Response.OnCompleted(() =>
+        {
+            _logger.Debug($"Connection closed. CorrelationId: {correlationId} Time: {DateTime.UtcNow}");
             
             return Task.CompletedTask;
         });

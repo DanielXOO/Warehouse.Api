@@ -13,7 +13,6 @@ public class CategoriesController : Controller
     private readonly IMediator _mediator;
     
     
-    
     public CategoriesController(IMediator mediator)
     {
         _mediator = mediator;
@@ -33,7 +32,7 @@ public class CategoriesController : Controller
         return CreatedAtAction(nameof(GetCategoryById), new { category.Id }, category);
     }
 
-    [HttpGet("/{id:long}")]
+    [HttpGet("{id:long}")]
     public async Task<IActionResult> GetCategoryById(long id)
     {
         var categoryQuery = new GetCategoryByIdQuery(id);
